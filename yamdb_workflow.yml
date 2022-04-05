@@ -44,8 +44,7 @@ jobs:
           push: true
           tags: tastybaev/yamdb_final:latest
   
-  deploy:
-    if: github.ref == 'refs/heads/master'
+deploy:
     runs-on: ubuntu-latest
     needs: build_and_push_to_docker_hub
     steps:
@@ -56,22 +55,17 @@ jobs:
           username: ${{ secrets.USER }}
           key: ${{ secrets.SSH_KEY }}
           passphrase: ${{ secrets.PASSPHRASE }}
-          stack_file_name: docker-compose.yaml
           script: |
-            sudo docker pull tastybaev/yamdb_final
             sudo docker-compose stop
             sudo docker-compose rm web
-            touch .env 
-            echo SECRET_KEY=${{ secrets.SECRET_KEY }} > .env
-            echo DEBUG=${{ secrets.DEBUG }} > .env
-            echo ALLOWED_HOSTS=${{ secrets.ALLOWED_HOSTS }} > .env
+            touch .env
             echo DB_ENGINE=${{ secrets.DB_ENGINE }} >> .env
             echo DB_NAME=${{ secrets.DB_NAME }} >> .env
             echo POSTGRES_USER=${{ secrets.POSTGRES_USER }} >> .env
             echo POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }} >> .env
             echo DB_HOST=${{ secrets.DB_HOST }} >> .env
             echo DB_PORT=${{ secrets.DB_PORT }} >> .env
-            sudo docker-compose up -d 
+            sudo docker-compose up -d
   
   send_message:
     if: github.ref == 'refs/heads/master'
