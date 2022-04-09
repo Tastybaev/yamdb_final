@@ -79,8 +79,13 @@
   "role": "admin"
 }
 
-Проект будет доступен по вашему IP-адресу.
+Проект будет доступен IP-адресу:
 
-Проект доступен по адресу: http://62.84.122.112/api/v1/
+http://84.201.167.253/redoc/
 
-Образ на DockerHub: https://hub.docker.com/repository/docker/tastybaev/yamdb_final
+http://84.201.167.253/api/v1/
+
+http://84.201.167.253/admin/
+
+Проект разрабатывался в команде, ссылка на репозиторий:  
+https://github.com/Tastybaev/api_yamdb
